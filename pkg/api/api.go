@@ -1,6 +1,9 @@
 package api
 
-import "github.com/prongbang/gomulti-source/pkg/api/post"
+import (
+	"github.com/prongbang/gomulti-source/pkg/api/post"
+	"net/http"
+)
 
 type API interface {
 	Register()
@@ -12,6 +15,8 @@ type api struct {
 
 func (a *api) Register() {
 	a.PostRoute.Initial()
+
+	_ = http.ListenAndServe(":8080", nil)
 }
 
 func NewAPI(

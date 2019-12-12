@@ -5,9 +5,15 @@
 
 package db
 
+import (
+	_ "github.com/go-sql-driver/mysql"
+)
+
 // Injectors from wire.go:
 
 func NewDbConnection() DataSource {
-	dbDataSource := NewDataSource()
+	mongoDriver := NewMongoDB()
+	sqLxDriver := NewMariaDB()
+	dbDataSource := NewDataSource(mongoDriver, sqLxDriver)
 	return dbDataSource
 }

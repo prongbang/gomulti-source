@@ -2,6 +2,7 @@ package db
 
 import (
 	"github.com/jmoiron/sqlx"
+	"github.com/prongbang/gomulti-source/pkg/db/driver"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -23,9 +24,9 @@ func (d *dataSource) GetMongoDB() *mongo.Client {
 	return d.MongoDB
 }
 
-func NewDataSource() DataSource {
+func NewDataSource(mongoDB driver.MongoDriver, mariaDB driver.SQLxDriver) DataSource {
 	return &dataSource{
-		MongoDB: NewMongoDB().Connect(),
-		MariaDB: NewMariaDB().Connect(),
+		MongoDB: mongoDB.Connect(),
+		MariaDB: mariaDB.Connect(),
 	}
 }
