@@ -1,4 +1,4 @@
-package di
+package cmd
 
 import (
 	"github.com/prongbang/gomulti-source/pkg/api"
