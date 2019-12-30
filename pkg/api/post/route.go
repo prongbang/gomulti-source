@@ -1,9 +1,7 @@
 package post
 
 import (
-	"fmt"
 	"net/http"
-	"time"
 )
 
 type Route interface {
@@ -15,9 +13,7 @@ type route struct {
 }
 
 func (r *route) Initial() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		_, _ = fmt.Fprintf(w, "Hello World! %s", time.Now())
-	})
+	http.HandleFunc("/", r.Handle.HelloWorld)
 }
 
 func NewRoute(handle Handler) Route {
