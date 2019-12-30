@@ -6,5 +6,7 @@ import (
 )
 
 func Run() {
-	api.CreateAPI(db.NewDbConnection()).Register()
+	conn := db.NewDbConnection()
+	apis := api.CreateAPI(conn)
+	apis.Register()
 }
