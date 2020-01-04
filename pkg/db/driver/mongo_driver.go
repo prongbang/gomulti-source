@@ -6,5 +6,5 @@ import (
 
 // MongoDriver is the interface
 type MongoDriver interface {
-	Connect() *mongo.Client
+	Connect() *mongo.Database
 }

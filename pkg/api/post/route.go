@@ -13,7 +13,8 @@ type route struct {
 }
 
 func (r *route) Initial() {
-	http.HandleFunc("/", r.Handle.HelloWorld)
+	http.HandleFunc("/v1/posts", r.Handle.GetPostList)
+	http.HandleFunc("/v1/post", r.Handle.GetPost)
 }
 
 func NewRoute(handle Handler) Route {

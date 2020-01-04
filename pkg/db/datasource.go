@@ -8,11 +8,11 @@ import (
 
 type DataSource interface {
 	GetMariaDB() *sqlx.DB
-	GetMongoDB() *mongo.Client
+	GetMongoDB() *mongo.Database
 }
 
 type dataSource struct {
-	MongoDB *mongo.Client
+	MongoDB *mongo.Database
 	MariaDB *sqlx.DB
 }
 
@@ -20,7 +20,7 @@ func (d *dataSource) GetMariaDB() *sqlx.DB {
 	return d.MariaDB
 }
 
-func (d *dataSource) GetMongoDB() *mongo.Client {
+func (d *dataSource) GetMongoDB() *mongo.Database {
 	return d.MongoDB
 }
 

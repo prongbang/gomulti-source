@@ -14,14 +14,14 @@ type mongoDB struct {
 	Cfg Config
 }
 
-func (m *mongoDB) Connect() *mongo.Client {
+func (m *mongoDB) Connect() *mongo.Database {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(fmt.Sprintf("mongodb://%s:27017", m.Cfg.Host)))
 	if err != nil {
 		log.Fatalf("MongoDb Connection fail : %s", err)
 	}
 	log.Print("MongoDb Connected.")
-	return client
+	return client.Database(m.Cfg.DatabaseName)
 }
 
 func NewMongoDB() driver.MongoDriver {
@@ -30,7 +30,7 @@ func NewMongoDB() driver.MongoDriver {
 			User:         "root",
 			Pass:         "pass",
 			Host:         "localhost",
-			DatabaseName: "",
+			DatabaseName: "nameDB",
 		},
 	}
 }
