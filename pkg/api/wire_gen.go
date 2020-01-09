@@ -13,7 +13,11 @@ import (
 // Injectors from wire.go:
 
 func CreateAPI(dbSource db.DataSource) API {
-	route := post.NewPostAPI(dbSource)
+	dataSource := post.NewDataSource(dbSource)
+	repository := post.NewRepository(dataSource)
+	useCase := post.NewUseCase(repository)
+	handler := post.NewHandler(useCase)
+	route := post.NewRoute(handler)
 	apiAPI := NewAPI(route)
 	return apiAPI
 }

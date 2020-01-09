@@ -11,7 +11,7 @@ import (
 func CreateAPI(dbSource db.DataSource) API {
 	wire.Build(
 		NewAPI,
-		post.NewPostAPI,
+		post.ProviderSet,
 	)
 	return nil
 }
